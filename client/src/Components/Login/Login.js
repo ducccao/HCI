@@ -7,6 +7,10 @@ import {
   TextField,
   Button,
 } from "@material-ui/core";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { openAlert } from "./../../utils/AlertModal";
+import { checkCookie, getCookie, setCookie } from "../../utils/cookie";
 
 const mate = makeStyles((theme) => ({
   wrapper: {
@@ -39,6 +43,7 @@ const mate = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-evenly",
     alignItems: "center",
+    marginBottom: -15,
   },
   btn: {
     width: "25%",
@@ -62,6 +67,33 @@ function Login() {
 
   const handleLogin = (e) => {
     console.log(infor);
+    const url = `http://localhost:1212/user/login`;
+    const data = {
+      ...infor,
+    };
+    const config = {};
+    axios
+      .post(url, data, config)
+      .then((res) => {
+        console.log(res.data);
+
+        const messageTrigger = {
+          title: res.data.msg,
+          timer: 1500,
+          icon: "success",
+        };
+        openAlert(messageTrigger);
+        setCookie("accesstoken", res.data.accesstoken);
+      })
+      .catch((er) => {
+        console.log(er.response);
+        const messageTrigger = {
+          title: er.response.data.msg,
+          timer: 1500,
+          icon: "error",
+        };
+        openAlert(messageTrigger);
+      });
   };
 
   return (
