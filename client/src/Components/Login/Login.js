@@ -82,6 +82,7 @@ function Login() {
           timer: 1500,
           icon: "success",
         };
+
         openAlert(messageTrigger);
         setCookie("accesstoken", res.data.accesstoken);
       })
