@@ -31,7 +31,7 @@ const mate = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: theme.palette.success.main,
+    backgroundColor: theme.palette.info.main,
   },
   group_feature: {
     height: 200,
@@ -39,6 +39,10 @@ const mate = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+  },
+
+  btn_feature: {
+    padding: 24,
   },
 }));
 
@@ -63,10 +67,18 @@ function Dashboard() {
       </Box>
       <Box className={classes.dash_down}>
         <Box className={classes.group_feature}>
-          <Button variant="contained" color="primary">
+          <Button
+            className={classes.btn_feature}
+            variant="contained"
+            color="inherit"
+          >
             Zoom Big Image
           </Button>
-          <Button variant="contained" color="primary">
+          <Button
+            className={classes.btn_feature}
+            variant="contained"
+            color="inherit"
+          >
             Zoom Grid Images
           </Button>
         </Box>
