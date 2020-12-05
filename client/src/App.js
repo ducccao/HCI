@@ -32,9 +32,11 @@ function App() {
     <ThemeProvider theme={custom_theme}>
       <Router>
         <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/facemask" component={RecognizeFaceMask} />
+          <Route path="/" exact component={Login} />
+
+          <Route path="/login" exact component={Login} />
+          <Route path="/dashboard" exact component={Dashboard} />
+          <Route path="/facemask" exact component={RecognizeFaceMask} />
         </Switch>
       </Router>
     </ThemeProvider>

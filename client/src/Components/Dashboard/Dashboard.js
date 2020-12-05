@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles, Box, Grid, Button } from "@material-ui/core";
+import React, { useEffect, useState } from "react";
+import { makeStyles, Box, Grid, Button, Typography } from "@material-ui/core";
 
 const mate = makeStyles((theme) => ({
   dashboard: {
@@ -13,14 +13,29 @@ const mate = makeStyles((theme) => ({
     backgroundColor: theme.palette.primary.main,
   },
   big_image: {
-    width: "50%",
+    width: "35%",
     backgroundColor: theme.palette.primary.dark,
   },
-  grid_image: {
-    width: "50%",
-    display: "grid",
-    gridTemplateColumns: "auto auto auto",
-    backgroundColor: theme.palette.primary.light,
+  big: {
+    height: "100%",
+    width: "100%",
+    "& canvas": {
+      height: "100%",
+      width: "100%",
+    },
+  },
+  information: {
+    width: "65%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "",
+    alignItems: "flex-start",
+    backgroundColor: theme.palette.info.light,
+    color: "white",
+    "& .MuiTypography-root": {
+      padding: 24,
+      fontSize: 24,
+    },
   },
   grid_item: {
     border: "1px solid black",
@@ -42,27 +57,44 @@ const mate = makeStyles((theme) => ({
   },
 
   btn_feature: {
+    fontSize: 18,
     padding: 24,
+    fontWeight: "bold",
+    textTransform: "initial",
+  },
+  percent_gr: {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-around",
+    alignItems: "flex-start",
+  },
+  percent_typo: {
+    height: "50%",
   },
 }));
 
 function Dashboard() {
   const classes = mate();
+  const loadingCamera = (e) => {
+    const start_btn = document.getElementById("start_btn");
+    start_btn.style.display = "block";
+  };
+  useEffect(() => {}, []);
 
   return (
     <Box className={classes.dashboard}>
       <Box className={classes.dash_up}>
-        <Box className={classes.big_image}></Box>
-        <Box className={classes.grid_image}>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
-          <Box className={classes.grid_item}></Box>
+        <Box className={classes.big_image}>
+          <div className={classes.big} id="webcam-container"></div>
+        </Box>
+        <Box className={classes.information}>
+          <Typography>Name: Duc Cao</Typography>
+          <Typography>Age: 3</Typography>
+
+          <Typography className={classes.percent_typo}>
+            <div className={classes.percent_gr} id="label-container"></div>
+          </Typography>
         </Box>
       </Box>
       <Box className={classes.dash_down}>
@@ -71,15 +103,16 @@ function Dashboard() {
             className={classes.btn_feature}
             variant="contained"
             color="inherit"
+            onClick={loadingCamera}
           >
-            Zoom Big Image
+            Loading Camera
           </Button>
           <Button
             className={classes.btn_feature}
             variant="contained"
             color="inherit"
           >
-            Zoom Grid Images
+            Catching Error
           </Button>
         </Box>
       </Box>
