@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, Box, Grid, Button, Typography } from "@material-ui/core";
+import CircularStatic from "../CircularProgress/CircularProgress";
 
 const mate = makeStyles((theme) => ({
   dashboard: {
@@ -76,9 +77,17 @@ const mate = makeStyles((theme) => ({
 
 function Dashboard() {
   const classes = mate();
+  const [loadingCame, setLoadingCame] = useState(0);
   const loadingCamera = (e) => {
     const start_btn = document.getElementById("start_btn");
     start_btn.style.display = "block";
+  };
+
+  const handleLoadCamera = (e) => {
+    setTimeout(() => {
+      loadingCamera();
+      setLoadingCame(100);
+    }, 2000);
   };
   useEffect(() => {}, []);
 
@@ -92,9 +101,9 @@ function Dashboard() {
           <Typography>Name: Duc Cao</Typography>
           <Typography>Age: 3</Typography>
 
-          <Typography className={classes.percent_typo}>
+          <Box className={classes.percent_typo}>
             <div className={classes.percent_gr} id="label-container"></div>
-          </Typography>
+          </Box>
         </Box>
       </Box>
       <Box className={classes.dash_down}>
@@ -103,7 +112,7 @@ function Dashboard() {
             className={classes.btn_feature}
             variant="contained"
             color="inherit"
-            onClick={loadingCamera}
+            onClick={handleLoadCamera}
           >
             Loading Camera
           </Button>
