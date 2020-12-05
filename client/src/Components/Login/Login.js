@@ -88,8 +88,9 @@ function Login() {
       })
       .catch((er) => {
         console.log(er.response);
+        console.log(er);
         const messageTrigger = {
-          title: er.response.data.msg,
+          title: er?.response?.data?.msg || "Network Error!",
           timer: 1500,
           icon: "error",
         };
