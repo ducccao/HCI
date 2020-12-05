@@ -43,7 +43,8 @@
       // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
       // the link to your model provided by Teachable Machine export panel
-      const URL = "./my_model/";
+      //  const URL = "./my_model/";
+      const URL = `https://teachablemachine.withgoogle.com/models/xSc0sQGVm/`;
 
       let model, webcam, labelContainer, maxPredictions;
 
@@ -51,6 +52,8 @@
       async function init() {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
+        //  const modelURL = `http://localhost:1212/user/metadata`;
+        //const metadataURL = `http://localhost:1212/user/model`;
 
         // load the model and metadata
         // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
@@ -69,7 +72,10 @@
         // append elements to the DOM
         document.getElementById("webcam-container").appendChild(webcam.canvas);
         labelContainer = document.getElementById("label-container");
+        console.log(labelContainer);
+        console.log(maxPredictions);
         for (let i = 0; i < maxPredictions; i++) {
+          console.log(i);
           // and class labels
           labelContainer.appendChild(document.createElement("div"));
         }
@@ -89,7 +95,9 @@
           const classPrediction =
             prediction[i].className +
             ": " +
-            prediction[i].probability.toFixed(2);
+            prediction[i].probability.toFixed(2) * 100 +
+            "%";
+          console.log("percent: ", prediction[i].probability);
           labelContainer.childNodes[i].innerHTML = classPrediction;
         }
       }

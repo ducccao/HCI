@@ -3,20 +3,27 @@ require("./mongodb/mongodb");
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
+const path = require("path");
 const cors = require("cors");
 
 const app = express();
 
 const userRouter = require("./router/user.router");
-
+const tensorRouter = require("./router/tensor.router");
 // middleware
 app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
 
+//tensor model
+
+const tensorModelPath = path.join(__dirname, "/Tensorflow/model.json");
+
 // routes
 app.use("/user", userRouter);
+app.use("/user", tensorRouter);
+//app.use("/static", express.static(path.join(__dirname, tensorModelPath)));
 
 // cors
 // cors bugs - allowes get source from another host
