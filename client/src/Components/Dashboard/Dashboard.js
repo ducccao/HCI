@@ -72,6 +72,21 @@ const mate = makeStyles((theme) => ({
   },
   percent_typo: {
     height: "50%",
+    padding: 24,
+    fontSize: 24,
+  },
+  dash_loading: {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    height: "100vh",
+    width: "100%",
+    backgroundColor: " black;",
+    opacity: 0.7,
+    zIndex: 1400,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 }));
 
@@ -80,7 +95,9 @@ function Dashboard() {
   const [loadingCame, setLoadingCame] = useState(0);
   const loadingCamera = (e) => {
     const start_btn = document.getElementById("start_btn");
+    const start_wrap = document.getElementById("start_wrap");
     start_btn.style.display = "block";
+    start_wrap.style.display = "block";
   };
 
   const handleLoadCamera = (e) => {
@@ -93,6 +110,9 @@ function Dashboard() {
 
   return (
     <Box className={classes.dashboard}>
+      <Box className={classes.dash_loading}>
+        <CircularStatic />
+      </Box>
       <Box className={classes.dash_up}>
         <Box className={classes.big_image}>
           <div className={classes.big} id="webcam-container"></div>
