@@ -93,6 +93,7 @@ const mate = makeStyles((theme) => ({
 function Dashboard() {
   const classes = mate();
   const [loadingCame, setLoadingCame] = useState(0);
+  const [isDissLoading, setisDissLoading] = useState(false);
   const loadingCamera = (e) => {
     const start_btn = document.getElementById("start_btn");
     const start_wrap = document.getElementById("start_wrap");
@@ -102,6 +103,7 @@ function Dashboard() {
 
   const handleLoadCamera = (e) => {
     setLoadingCame(1);
+    setisDissLoading(true);
     setTimeout(() => {
       loadingCamera();
       setLoadingCame(100);
@@ -140,6 +142,7 @@ function Dashboard() {
             className={classes.btn_feature}
             variant="contained"
             color="inherit"
+            disabled={isDissLoading ? true : false}
             onClick={handleLoadCamera}
           >
             Loading Camera
