@@ -101,18 +101,26 @@ function Dashboard() {
   };
 
   const handleLoadCamera = (e) => {
+    setLoadingCame(1);
     setTimeout(() => {
       loadingCamera();
       setLoadingCame(100);
-    }, 2000);
+    }, 2400);
   };
   useEffect(() => {}, []);
 
   return (
     <Box className={classes.dashboard}>
-      <Box className={classes.dash_loading}>
-        <CircularStatic />
-      </Box>
+      <>
+        {loadingCame === 1 ? (
+          <Box className={classes.dash_loading}>
+            <CircularStatic />{" "}
+          </Box>
+        ) : (
+          <></>
+        )}
+      </>
+
       <Box className={classes.dash_up}>
         <Box className={classes.big_image}>
           <div className={classes.big} id="webcam-container"></div>
