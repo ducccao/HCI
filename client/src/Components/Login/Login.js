@@ -11,6 +11,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import { openAlert } from "./../../utils/AlertModal";
 import { checkCookie, getCookie, setCookie } from "../../utils/cookie";
+import { useHistory } from "react-router-dom";
 
 const mate = makeStyles((theme) => ({
   wrapper: {
@@ -52,6 +53,7 @@ const mate = makeStyles((theme) => ({
 
 function Login() {
   const classes = mate();
+  const history = useHistory();
 
   const [infor, setinfor] = useState({
     username: "",
@@ -85,6 +87,7 @@ function Login() {
 
         openAlert(messageTrigger);
         setCookie("accesstoken", res.data.accesstoken);
+        history.push("/dashboard");
       })
       .catch((er) => {
         console.log(er.response);
