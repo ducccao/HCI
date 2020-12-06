@@ -159,6 +159,13 @@ function Dashboard() {
         <Box className={classes.big_image}>
           <div className={classes.big} id="webcam-container"></div>
         </Box>
+
+        <Box className={classes.guardian}>
+          <Typography>
+            Welcome <h1> abc</h1>
+          </Typography>
+        </Box>
+
         <Box className={classes.information}>
           <Typography>Name: Duc Cao</Typography>
           <Typography>Age: 3</Typography>
