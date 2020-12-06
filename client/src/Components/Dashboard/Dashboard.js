@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { makeStyles, Box, Grid, Button, Typography } from "@material-ui/core";
 import CircularStatic from "../CircularProgress/CircularProgress";
 import { openAlert } from "../../utils/AlertModal";
+import axios from "axios";
+import { getCookie } from "../../utils/cookie";
 
 const mate = makeStyles((theme) => ({
   dashboard: {
@@ -140,8 +142,29 @@ function Dashboard() {
       openAlert(messageTrigger);
     }
   };
+  const getGuardianInfor = () => {
+    const token = getCookie("accesstoken");
+    console.log(token);
+    const url = `http://localhost:1212/user/infor`;
 
-  useEffect(() => {}, []);
+    const config = {
+      headers: {
+        Authorization: token,
+      },
+    };
+    axios
+      .get(url, config)
+      .then((res) => {
+        console.log(res.data);
+      })
+      .catch((er) => {
+        console.log(er.response);
+      });
+  };
+
+  useEffect(() => {
+    getGuardianInfor();
+  }, []);
 
   return (
     <Box className={classes.dashboard}>
@@ -161,9 +184,7 @@ function Dashboard() {
         </Box>
 
         <Box className={classes.guardian}>
-          <Typography>
-            Welcome <h1> abc</h1>
-          </Typography>
+          <Typography>Welcome</Typography>
         </Box>
 
         <Box className={classes.information}>
