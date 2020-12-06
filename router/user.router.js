@@ -8,4 +8,6 @@ router.post("/register", userCtrl.register);
 
 router.post("/login", userCtrl.login);
 
+router.get("/guardian", userCtrl.getGuardian);
+
 module.exports = router;

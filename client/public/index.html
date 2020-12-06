@@ -54,6 +54,12 @@
         background-color: #e0e0e0;
         border: none;
       }
+      #face_value {
+        display: none;
+      }
+      #facemask_value {
+        display: none;
+      }
     </style>
   </head>
   <body>
@@ -64,6 +70,10 @@
 
     <!-- <div>Teachable Machine Image Model</div> -->
     <div id="start_wrap"></div>
+
+    <div id="face_value"></div>
+    <div id="facemask_value"></div>
+
     <button id="start_btn" type="button" onclick="init()">Start</button>
     <!-- <div id="webcam-container"></div>
     <div id="label-container"></div> -->
@@ -104,12 +114,14 @@
         // append elements to the DOM
         document.getElementById("webcam-container").appendChild(webcam.canvas);
         labelContainer = document.getElementById("label-container");
-        console.log(labelContainer);
-        console.log(maxPredictions);
+        //  console.log(labelContainer);
+        //   console.log(maxPredictions);
         for (let i = 0; i < maxPredictions; i++) {
-          console.log(i);
+          //   console.log(i);
           // and class labels
-          labelContainer.appendChild(document.createElement("div"));
+          let ele = document.createElement("div");
+          ele.classList.add(`child_${i}`);
+          labelContainer.appendChild(ele);
         }
       }
 
@@ -123,7 +135,16 @@
       async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
+
         for (let i = 0; i < maxPredictions; i++) {
+          // create an ele to hold percent
+          const facevalue = document.getElementById("face_value");
+          const facemask_value = document.getElementById("facemask_value");
+
+          // console.log("i ", i);
+          facevalue.innerHTML = prediction[0].probability * 100;
+          facemask_value.innerHTML = prediction[1].probability * 100;
+
           const classPrediction =
             prediction[i].className +
             ": " +
@@ -131,6 +152,9 @@
             "%";
           //  console.log("percent: ", prediction[i].probability);
           percent = prediction[i].probability;
+
+          // console.log(prediction[i].probability);
+
           labelContainer.childNodes[i].innerHTML = classPrediction;
         }
       }

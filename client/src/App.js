@@ -6,6 +6,7 @@ import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Dashboard from "./Components/Dashboard/Dashboard";
 import RecognizeFaceMask from "./Components/RecognizeFaceMask/RecognizeFaceMask";
+import SignUp from "./Components/SignUp/SignUp";
 
 const custom_theme = createMuiTheme({
   palette: {
@@ -35,6 +36,7 @@ function App() {
           <Route path="/" exact component={Login} />
 
           <Route path="/login" exact component={Login} />
+          <Route path="/sign-up" exact component={SignUp} />
           <Route path="/dashboard" exact component={Dashboard} />
           <Route path="/facemask" exact component={RecognizeFaceMask} />
         </Switch>

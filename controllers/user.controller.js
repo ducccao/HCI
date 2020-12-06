@@ -91,6 +91,32 @@ const userCtrl = {
       });
     }
   },
+  getGuardian: async (req, res) => {
+    const token = req.header("Authorization");
+    if (!token) {
+      return res.status(400).json({ msg: "Invalid Authentication!" });
+    }
+
+    jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET || "^PH<qLUsE{3/B6e%",
+      (er, user) => {
+        if (er) {
+          return res.status(400).json({ msg: "Invalid Authentication!" });
+        }
+        req.user = user;
+      }
+    );
+
+    try {
+      const user = await Users.findById(req.user.id);
+      if (!user) return res.status(400).json({ msg: "User does not exists" });
+
+      res.json({ user });
+    } catch (er) {
+      return res.status(500).json({ msg: er.message });
+    }
+  },
 };
 
 const createAccessToken = (user) => {
