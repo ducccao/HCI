@@ -32,7 +32,7 @@ const mate = makeStyles((theme) => ({
     flexDirection: "column",
     justifyContent: "",
     alignItems: "flex-start",
-    backgroundColor: theme.palette.info.light,
+    backgroundColor: theme.palette.info.main,
     color: "white",
     "& .MuiTypography-root": {
       padding: 24,
@@ -48,7 +48,7 @@ const mate = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: theme.palette.info.main,
+    backgroundColor: theme.palette.primary.main,
   },
   group_feature: {
     height: 200,

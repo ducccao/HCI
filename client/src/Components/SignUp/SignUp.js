@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { openAlert } from "./../../utils/AlertModal";
+import { openAlert } from "../../utils/AlertModal";
 import { checkCookie, getCookie, setCookie } from "../../utils/cookie";
 import { useHistory, Link } from "react-router-dom";
 
@@ -48,10 +48,9 @@ const mate = makeStyles((theme) => ({
   },
   btn: {
     width: "25%",
-
     textDecoration: "none",
   },
-  su: {
+  back: {
     width: "100%",
   },
 }));
@@ -72,39 +71,7 @@ function Login() {
     });
   };
 
-  const handleLogin = (e) => {
-    console.log(infor);
-    const url = `http://localhost:1212/user/login`;
-    const data = {
-      ...infor,
-    };
-    const config = {};
-    axios
-      .post(url, data, config)
-      .then((res) => {
-        console.log(res.data);
-
-        const messageTrigger = {
-          title: res.data.msg,
-          timer: 1500,
-          icon: "success",
-        };
-
-        openAlert(messageTrigger);
-        setCookie("accesstoken", res.data.accesstoken);
-        history.push("/dashboard");
-      })
-      .catch((er) => {
-        console.log(er.response);
-        console.log(er);
-        const messageTrigger = {
-          title: er?.response?.data?.msg || "Network Error!",
-          timer: 1500,
-          icon: "error",
-        };
-        openAlert(messageTrigger);
-      });
-  };
+  const handleSignUp = (e) => {};
 
   return (
     <div className={classes.wrapper}>
@@ -136,18 +103,18 @@ function Login() {
                 variant="contained"
                 color="primary"
                 className={classes.btn}
-                onClick={handleLogin}
+                onClick={handleSignUp}
               >
-                Login
+                Sign Up
               </Button>
 
-              <Link to="/sign-up" className={classes.btn}>
+              <Link to="/login" className={classes.btn}>
                 <Button
                   variant="contained"
                   color="primary"
-                  className={classes.su}
+                  className={classes.back}
                 >
-                  Sign up
+                  Back
                 </Button>
               </Link>
             </Box>
