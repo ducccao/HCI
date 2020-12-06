@@ -12,6 +12,7 @@ import Swal from "sweetalert2";
 import { openAlert } from "../../utils/AlertModal";
 import { checkCookie, getCookie, setCookie } from "../../utils/cookie";
 import { useHistory, Link } from "react-router-dom";
+import Axios from "axios";
 
 const mate = makeStyles((theme) => ({
   wrapper: {
@@ -71,7 +72,34 @@ function Login() {
     });
   };
 
-  const handleSignUp = (e) => {};
+  const handleSignUp = (e) => {
+    const data = {
+      ...infor,
+    };
+    const url = `http://localhost:1212/user/register`;
+    const config = {};
+    Axios.post(url, data, config)
+      .then((res) => {
+        console.log(res.data);
+
+        const messageTrigger = {
+          title: res.data.msg,
+          timer: 1500,
+          icon: "success",
+        };
+
+        openAlert(messageTrigger);
+      })
+      .catch((er) => {
+        console.log(er.response);
+        const messageTrigger = {
+          title: er?.response?.data?.msg || "Network Error!",
+          timer: 1500,
+          icon: "error",
+        };
+        openAlert(messageTrigger);
+      });
+  };
 
   return (
     <div className={classes.wrapper}>
