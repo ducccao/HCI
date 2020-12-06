@@ -4,7 +4,9 @@ function openAlert(messageTrigger) {
   let timerInterval;
   Swal.fire({
     title: messageTrigger.title,
-    //html: "I will close in <b></b> milliseconds.",
+    html: messageTrigger?.html
+      ? `<h1 style="color:red;" >${messageTrigger.html}</h1>`
+      : "",
     timer: messageTrigger.timer,
     icon: messageTrigger.icon,
     timerProgressBar: true,

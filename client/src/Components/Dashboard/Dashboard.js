@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles, Box, Grid, Button, Typography } from "@material-ui/core";
 import CircularStatic from "../CircularProgress/CircularProgress";
+import { openAlert } from "../../utils/AlertModal";
 
 const mate = makeStyles((theme) => ({
   dashboard: {
@@ -74,6 +75,7 @@ const mate = makeStyles((theme) => ({
     height: "50%",
     padding: 24,
     fontSize: 24,
+    opacity: 0,
   },
   dash_loading: {
     position: "fixed",
@@ -94,6 +96,7 @@ function Dashboard() {
   const classes = mate();
   const [loadingCame, setLoadingCame] = useState(0);
   const [isDissLoading, setisDissLoading] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
   const loadingCamera = (e) => {
     const start_btn = document.getElementById("start_btn");
     const start_wrap = document.getElementById("start_wrap");
@@ -109,6 +112,35 @@ function Dashboard() {
       setLoadingCame(100);
     }, 2400);
   };
+
+  const handleCatchingError = (e) => {
+    var vl_1 = document.getElementById("face_value");
+    var vl_2 = document.getElementById("facemask_value");
+
+    let face_value = vl_1.textContent;
+    let facemask_value = vl_2.textContent;
+
+    console.log(vl_1, vl_2);
+    console.log(+facemask_value);
+
+    if (+facemask_value >= 90) {
+      const messageTrigger = {
+        title: "This guy is wearing facemark!",
+        timer: 3000,
+        icon: "success",
+      };
+      openAlert(messageTrigger);
+    } else {
+      const messageTrigger = {
+        title: "This guy isn't wearing facemark!",
+        html: "Go catch him!",
+        timer: 3000,
+        icon: "warning",
+      };
+      openAlert(messageTrigger);
+    }
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -132,6 +164,7 @@ function Dashboard() {
           <Typography>Age: 3</Typography>
 
           <Box className={classes.percent_typo}>
+            {/* show specification right there  */}
             <div className={classes.percent_gr} id="label-container"></div>
           </Box>
         </Box>
@@ -151,6 +184,7 @@ function Dashboard() {
             className={classes.btn_feature}
             variant="contained"
             color="inherit"
+            onClick={handleCatchingError}
           >
             Catching Error
           </Button>
