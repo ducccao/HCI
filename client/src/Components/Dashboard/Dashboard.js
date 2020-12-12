@@ -184,7 +184,7 @@ function Dashboard() {
         </Box>
 
         <Box className={classes.guardian}>
-          <Typography>Welcome</Typography>
+          {/* <Typography>Welcome</Typography> */}
         </Box>
 
         <Box className={classes.information}>
